@@ -123,7 +123,10 @@ import { Modal } from 'bootstrap/dist/js/bootstrap'
 import { VAceEditor } from 'vue3-ace-editor';
 import ace from 'ace-builds';
 import 'ace-builds/src-noconflict/mode-java'
-
+import "ace-builds/webpack-resolver";
+import 'ace-builds/src-noconflict/mode-json';
+import 'ace-builds/src-noconflict/theme-chrome';
+import 'ace-builds/src-noconflict/ext-language_tools';
 
 export default {
     components: {
