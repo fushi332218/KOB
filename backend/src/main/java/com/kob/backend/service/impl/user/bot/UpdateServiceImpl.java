@@ -60,6 +60,7 @@ public class UpdateServiceImpl implements UpdateService {
 
         if (content.length() > 10000) {
             map.put("error_message", "代码长度不能超过10000");
+            return map;
         }
 
         Bot bot = botMapper.selectById(bot_id);

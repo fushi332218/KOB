@@ -59,6 +59,7 @@
                                 <tr>
                                     <th>名称</th>
                                     <th>创建时间</th>
+                                    <th>修改时间</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
@@ -66,6 +67,7 @@
                                 <tr v-for="bot in bots" :key="bot.id">
                                     <td>{{ bot.title }}</td>
                                     <td>{{ bot.createtime }}</td>
+                                    <td>{{ bot.modifytime }}</td>
                                     <td>
                                         <button type="button" class="btn btn-secondary" style="margin-right: 10px;" data-bs-toggle="modal" :data-bs-target="'#update-bot-modal-' + bot.id">修改</button>
                                         <button type="button" class="btn btn-danger" @click="remove_bot(bot)">删除</button>
@@ -189,15 +191,14 @@ export default {
             })
         }
 
-
         const update_bot = (bot) => {
             botadd.error_message = "";
             $.ajax({
-                url:"http://127.0.0.1:3000/user/bot/update/",
+                url: "http://127.0.0.1:3000/user/bot/update/",
                 type: "post",
                 data: {
                     bot_id: bot.id,
-                    title:bot.title,
+                    title: bot.title,
                     description: bot.description,
                     content: bot.content,
                 },
@@ -206,7 +207,7 @@ export default {
                 },
                 success(resp) {
                     if (resp.error_message === "success") {
-                        Modal.getInstance('#update-bot-modal-' + bot.id).hide(1);
+                        Modal.getInstance('#update-bot-modal-' + bot.id).hide();
                         refresh_bots();
                     } else {
                         botadd.error_message = resp.error_message;
@@ -214,6 +215,7 @@ export default {
                 }
             })
         }
+
 
         const remove_bot = (bot) => {
             $.ajax({
